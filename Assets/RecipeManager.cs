@@ -19,7 +19,7 @@ public enum PowerUps {
 }
 
 public struct Recipe {
-	string name;
+	public string name;
 	Tuple<Ingredients,int>[] ingredients; 
 	int reward;
 	PowerUps powerUp;
@@ -40,6 +40,10 @@ public struct Recipe {
 public class RecipeManager : MonoBehaviour {
 
 	public List<Recipe> recipes;
+	public GameObject RecipeContainer;
+	public GameObject RecipePrefab;
+
+	private int test = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -58,6 +62,11 @@ public class RecipeManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (0 == test) {
+			test = 1;
+			GameObject card = GameObject.Instantiate (RecipePrefab);
+			card.transform.SetParent (RecipeContainer.transform);
+			card.GetComponent<RecipeCard> ().NameLabel.text = recipes [0].name;
+		}
 	}
 }
